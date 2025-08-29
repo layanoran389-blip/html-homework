@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Homework</title>
+</head>
+<body>
+    <h1>Check the console for output</h1>
+    <script>
+
+// =============================
+// To-Do List Manager
+// =============================
+
+// Task list
+let tasks = [];
+
+// Task class
+class Task {
+    constructor(title, description, dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.completed = false;
+    }
+
+    markCompleted() {
+        this.completed = true;
+    }
+
+    toString() {
+        return `${this.title} - ${this.description} | Due: ${this.dueDate} | Completed: ${this.completed}`;
+    }
+}
+
+// Add new task
+function addTask(title, description, dueDate) {
+    let task = new Task(title, description, dueDate);
+    tasks.push(task);
+    console.log(`Task "${title}" added successfully!`);
+}
+
+// Remove task by title
+function removeTask(title) {
+    tasks = tasks.filter(task => task.title !== title);
+    console.log(`Task "${title}" removed successfully!`);
+}
+
+// Show all tasks
+function showTasks() {
+    console.log("===== All Tasks =====");
+    if (tasks.length === 0) {
+        console.log("No tasks available.");
+    } else {
+        tasks.forEach((task, index) => {
+            console.log(`${index + 1}. ${task.toString()}`);
+        });
+    }
+}
+
+// Search for a task
+function searchTask(title) {
+    let found = tasks.filter(task => task.title.toLowerCase().includes(title.toLowerCase()));
+    console.log(`===== Search Results for "${title}" =====`);
+    if (found.length === 0) {
+        console.log("No matching tasks found.");
+    } else {
+        found.forEach(task => console.log(task.toString()));
+    }
+}
+
+// Update task title
+function updateTaskTitle(oldTitle, newTitle) {
+    let task = tasks.find(task => task.title === oldTitle);
+    if (task) {
+        task.title = newTitle;
+        console.log(`Task title updated from "${oldTitle}" to "${newTitle}"`);
+    } else {
+        console.log(`Task "${oldTitle}" not found`);
+    }
+}
+
+// Example usage
+addTask("Learn JavaScript", "Complete exercises from chapter 3", "2025-09-01");
+addTask("Buy groceries", "Milk, Bread, Eggs, Fruits", "2025-08-30");
+addTask("Workout", "30 minutes cardio", "2025-08-29");
+
+showTasks();
+
+console.log("\nMarking 'Workout' as completed...");
+tasks[2].markCompleted();
+
+showTasks();
+
+console.log("\nSearching for 'buy'...");
+searchTask("buy");
+
+console.log("\nUpdating task title 'Buy groceries' to 'Grocery shopping'...");
+updateTaskTitle("Buy groceries", "Grocery shopping");
+
+showTasks();
+
+console.log("\nRemoving 'Learn JavaScript'...");
+removeTask("Learn JavaScript");
+
+showTasks();
+
+        console.log("Hello, this is your JS code running!");
+    </script>
+</body>
+</html>
+
